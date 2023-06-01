@@ -1,7 +1,7 @@
-const {sayHi} = require("./controller");
+import mongoose from "mongoose";
+import Users from "./mongoSchema.js";
+import Events from "../events/mongoSchema.js";
 
-async function routes (fastify, options) {
-    fastify.get('/', sayHi);
-}
+async function routes(fastify, options) {}
 
-module.exports = routes
+export default routes;
