@@ -9,7 +9,7 @@ const fastify = Fastify({
 
 const envSchema = {
   type: "object",
-  required: ["PORT", "MONGO_USERNAME", "MONGO_PASSWORD"],
+  required: ["PORT", "MONGO_USERNAME", "MONGO_PASSWORD", "DB_NAME"],
   properties: {
     PORT: {
       type: "string",
@@ -44,7 +44,7 @@ try {
 await fastify.register(UsersRoutes);
 
 // Run the server!
-fastify.listen({ port: 3000 }, function (err, address) {
+fastify.listen({ port: fastify.config.PORT }, function (err, address) {
   if (err) {
     fastify.log.error(err);
     process.exit(1);
