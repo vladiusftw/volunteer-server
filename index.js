@@ -65,6 +65,14 @@ await fastify.register(fastifyBcrypt, {
 
 await fastify.register(fastifyJwt, { secret: fastify.config.SUPER_SECRET });
 
+fastify.decorate("authenticate", async function (request, reply) {
+  try {
+    await request.jwtVerify();
+  } catch (err) {
+    reply.send(err);
+  }
+});
+
 try {
   const url = `mongodb+srv://${fastify.config.MONGO_USERNAME}:${fastify.config.MONGO_PASSWORD}@cluster0.f0kpkbh.mongodb.net/${fastify.config.DB_NAME}?retryWrites=true&w=majority`;
   await mongoose.connect(url);

@@ -10,6 +10,15 @@ async function routes(fastify, options) {
     { schema: { body: bodyRegisterUserSchema } },
     registerUser
   );
+
+  fastify.get(
+    "/test",
+    { onRequest: fastify.authenticate },
+    async (request, reply) => {
+      console.log(request.user);
+      return { data: "hello world2" };
+    }
+  );
 }
 
 export default routes;
