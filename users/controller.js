@@ -27,4 +27,6 @@ const registerUser = async (response, reply) => {
   }
 };
 
+const login = async (request, reply) => {};
+
 export { registerUser };

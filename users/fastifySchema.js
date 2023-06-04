@@ -34,4 +34,10 @@ const bodyRegisterUserSchema = {
   },
 };
 
+const bodyLoginUserSchema = {
+  type: "object",
+  required: [],
+  properties: {},
+};
+
 export { bodyRegisterUserSchema };

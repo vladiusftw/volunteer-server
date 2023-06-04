@@ -11,14 +11,7 @@ async function routes(fastify, options) {
     registerUser
   );
 
-  fastify.get(
-    "/test",
-    { onRequest: fastify.authenticate },
-    async (request, reply) => {
-      console.log(request.user);
-      return { data: "hello world2" };
-    }
-  );
+  fastify.post("/login");
 }
 
 export default routes;
