@@ -15,6 +15,7 @@
     "@fastify/env": "^4.2.0",
     "@fastify/jwt": "^7.0.0",
     "fastify": "^4.17.0",
+    "fastify-bcrypt": "^1.0.1",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.2.2",
     "nodemon": "^2.0.22"

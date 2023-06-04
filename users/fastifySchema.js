@@ -1,6 +1,14 @@
 const bodyRegisterUserSchema = {
   type: "object",
-  required: ["name", "dob", "phone", "email", "occupation", "nationality"],
+  required: [
+    "name",
+    "dob",
+    "phone",
+    "email",
+    "password",
+    "occupation",
+    "nationality",
+  ],
   properties: {
     name: {
       type: "string",
@@ -12,6 +20,9 @@ const bodyRegisterUserSchema = {
       type: "number",
     },
     email: {
+      type: "string",
+    },
+    password: {
       type: "string",
     },
     occupation: {
