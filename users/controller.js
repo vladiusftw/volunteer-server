@@ -11,7 +11,7 @@ const registerUser = async (response, reply) => {
       return { data: "Invalid Date" };
     }
     const hashedPassword = await fastify.bcrypt.hash(password);
-    const user = await Users.create({
+    await Users.create({
       name,
       dob,
       phone,
@@ -20,8 +20,7 @@ const registerUser = async (response, reply) => {
       occupation,
       nationality,
     });
-    const token = fastify.jwt.sign({ id: user["_id"] });
-    return { token };
+    return { data: "Registration complete" };
   } catch (e) {
     reply.code(400);
     return { data: e.toString() };
