@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "@fastify/cors";
 import UsersRoutes from "./users/routes.js";
 import fastifyJwt from "@fastify/jwt";
+import fastifyBcrypt from "fastify-bcrypt";
 
 const fastify = Fastify({
   logger: true,
@@ -18,6 +19,7 @@ const envSchema = {
     "DB_NAME",
     "FRONTEND_URL",
     "SUPER_SECRET",
+    "SALT_WORK_FACTOR",
   ],
   properties: {
     PORT: {
@@ -40,6 +42,10 @@ const envSchema = {
     SUPER_SECRET: {
       type: "string",
     },
+    SALT_WORK_FACTOR: {
+      type: "string",
+      default: 10,
+    },
   },
 };
 const options = {
@@ -51,6 +57,10 @@ await fastify.register(fastifyEnv, options);
 
 await fastify.register(cors, {
   origin: fastify.config.FRONTEND_URL,
+});
+
+await fastify.register(fastifyBcrypt, {
+  saltWorkFactor: 6,
 });
 
 await fastify.register(fastifyJwt, { secret: fastify.config.SUPER_SECRET });
