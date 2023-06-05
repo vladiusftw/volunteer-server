@@ -3,6 +3,7 @@ import Fastify from "fastify";
 import mongoose from "mongoose";
 import cors from "@fastify/cors";
 import UsersRoutes from "./users/routes.js";
+import EventsRoutes from "./events/routes.js";
 import fastifyJwt from "@fastify/jwt";
 import fastifyBcrypt from "fastify-bcrypt";
 import Swagger from "@fastify/swagger";
@@ -127,6 +128,8 @@ try {
 }
 
 await fastify.register(UsersRoutes, { prefix: "/api" });
+
+await fastify.register(EventsRoutes, { prefix: "/api" });
 
 // Run the server!
 fastify.listen({ port: fastify.config.PORT }, function (err, address) {
