@@ -1,4 +1,25 @@
 import mongoose from "mongoose";
+
+const subSchema = mongoose.Schema({
+  _id: false,
+  event_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "events",
+    required: true,
+  },
+  completed: {
+    type: Boolean,
+    required: true,
+  },
+  start_date: {
+    type: Date,
+    required: true,
+  },
+  end_date: {
+    type: Date,
+  },
+});
+
 const UserSchema = mongoose.Schema({
   name: {
     type: String,
@@ -29,26 +50,7 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  events: [
-    {
-      event_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "events",
-        required: true,
-      },
-      completed: {
-        type: Boolean,
-        required: true,
-      },
-      start_date: {
-        type: Date,
-        required: true,
-      },
-      end_date: {
-        type: Date,
-      },
-    },
-  ],
+  events: [subSchema],
 });
 
 const Users = mongoose.model("users", UserSchema);

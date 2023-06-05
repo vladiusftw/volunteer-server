@@ -1,4 +1,8 @@
-import { getEventsByCity, applyForNewEvent } from "./controller.js";
+import {
+  getEventsByCity,
+  applyForNewEvent,
+  applyForNewEventPreHandler,
+} from "./controller.js";
 import {
   applyForNewEventSchema,
   getEventByCitySchema,
@@ -13,7 +17,11 @@ async function routes(fastify, options) {
 
   fastify.put(
     "/users/user/events",
-    { ...applyForNewEventSchema, onRequest: [fastify.authenticate] },
+    {
+      ...applyForNewEventSchema,
+      onRequest: [fastify.authenticate],
+      preHandler: [applyForNewEventPreHandler],
+    },
     applyForNewEvent
   );
 }

@@ -118,7 +118,21 @@ const getUserByIdSchema = {
                   type: "object",
                   properties: {
                     event_id: {
-                      type: "string",
+                      type: "object",
+                      properties: {
+                        name: { type: "string", nullable: true },
+                        desc: { type: "string", nullable: true },
+                        host: { type: "string", nullable: true },
+                        country: { type: "string", nullable: true },
+                        city: { type: "string", nullable: true },
+                        area: { type: "string", nullable: true },
+                        start_date: { type: "string", nullable: true },
+                        end_date: { type: "string", nullable: true },
+                        wage: { type: "number", nullable: true },
+                        start_time: { type: "string", nullable: true },
+                        end_time: { type: "string", nullable: true },
+                        min_age: { type: "number", nullable: true },
+                      },
                     },
                     completed: {
                       type: "boolean",
@@ -129,10 +143,10 @@ const getUserByIdSchema = {
                     end_date: {
                       type: "string",
                     },
-                  }
-                }
-              }
-            }
+                  },
+                },
+              },
+            },
           },
         },
       },

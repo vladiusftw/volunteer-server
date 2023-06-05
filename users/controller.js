@@ -47,15 +47,15 @@ const login = async (request, reply) => {
 };
 
 const getUserById = async (request, reply) => {
-    try {
-        const { id } = request.user;
-        const user = await Users.findById({_id: id});
-        return ({data: user});
-    } catch (e) {
-        reply.code(400);
-        return { data: e.toString() };
-    }
-    
-}
+  try {
+    const { id } = request.user;
+    const user = await Users.findById({ _id: id }).populate("events.event_id");
+
+    return { data: user };
+  } catch (e) {
+    reply.code(400);
+    return { data: e.toString() };
+  }
+};
 
 export { registerUser, login, getUserById };
