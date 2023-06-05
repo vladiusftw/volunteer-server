@@ -47,16 +47,6 @@ const registerUserSchema = {
           },
         },
       },
-      400: {
-        description: "An Error has occured",
-        type: "object",
-        properties: {
-          data: {
-            type: "string",
-            example: "Error",
-          },
-        },
-      },
     },
   },
 };
@@ -83,16 +73,6 @@ const loginUserSchema = {
           token: {
             type: "string",
             example: "token1234",
-          },
-        },
-      },
-      400: {
-        description: "Invalid email/password",
-        type: "object",
-        properties: {
-          data: {
-            type: "string",
-            example: "Invalid email/password",
           },
         },
       },
