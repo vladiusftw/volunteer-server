@@ -67,4 +67,30 @@ const getEventByCitySchema = {
   },
 };
 
-export { getEventByCitySchema };
+const applyForNewEventSchema = {
+  schema: {
+    body: {
+      type: "object",
+      required: ["event_id"],
+      properties: {
+        event_id: {
+          type: "string",
+        },
+      },
+    },
+    response: {
+      200: {
+        description: "Applied for Event!",
+        type: "object",
+        properties: {
+          data: {
+            type: "string",
+            example: "Applied for Red Fest",
+          },
+        },
+      },
+    },
+  },
+};
+
+export { getEventByCitySchema, applyForNewEventSchema };
