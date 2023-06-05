@@ -10,4 +10,6 @@ const getEventsByCity = async (request, reply) => {
   }
 };
 
-export { getEventsByCity };
+const applyForNewEvent = async (request, reply) => {};
+
+export { getEventsByCity, applyForNewEvent };
