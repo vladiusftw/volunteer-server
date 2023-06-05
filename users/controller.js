@@ -39,4 +39,16 @@ const login = async (request, reply) => {
   return { data: "Invalid email/password" };
 };
 
-export { registerUser, login };
+const getUserById = async (request, reply) => {
+    try {
+        const { id } = request.user;
+        const user = await Users.findById({_id: id});
+        return ({data: user});
+    } catch (e) {
+        reply.code(400);
+        return { data: e.toString() };
+    }
+    
+}
+
+export { registerUser, login, getUserById };

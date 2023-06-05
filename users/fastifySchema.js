@@ -47,16 +47,6 @@ const registerUserSchema = {
           },
         },
       },
-      400: {
-        description: "An Error has occured",
-        type: "object",
-        properties: {
-          data: {
-            type: "string",
-            example: "Error",
-          },
-        },
-      },
     },
   },
 };
@@ -86,13 +76,62 @@ const loginUserSchema = {
           },
         },
       },
-      400: {
-        description: "Invalid email/password",
+    },
+  },
+};
+
+const getUserByIdSchema = {
+  schema: {
+    response: {
+      200: {
+        description: "User info obtained",
         type: "object",
         properties: {
           data: {
-            type: "string",
-            example: "Invalid email/password",
+            type: "object",
+            properties: {
+              name: {
+                type: "string",
+              },
+              dob: {
+                type: "string",
+              },
+              phone: {
+                type: "number",
+              },
+              email: {
+                type: "string",
+              },
+              password: {
+                type: "string",
+              },
+              occupation: {
+                type: "string",
+              },
+              nationality: {
+                type: "string",
+              },
+              events: {
+                type: "array",
+                items: {
+                  type: "object",
+                  properties: {
+                    event_id: {
+                      type: "string",
+                    },
+                    completed: {
+                      type: "boolean",
+                    },
+                    start_date: {
+                      type: "string",
+                    },
+                    end_date: {
+                      type: "string",
+                    },
+                  }
+                }
+              }
+            }
           },
         },
       },
@@ -100,4 +139,4 @@ const loginUserSchema = {
   },
 };
 
-export { registerUserSchema, loginUserSchema };
+export { registerUserSchema, loginUserSchema, getUserByIdSchema };
