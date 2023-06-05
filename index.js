@@ -5,9 +5,54 @@ import cors from "@fastify/cors";
 import UsersRoutes from "./users/routes.js";
 import fastifyJwt from "@fastify/jwt";
 import fastifyBcrypt from "fastify-bcrypt";
+import Swagger from "@fastify/swagger";
+import SwaggerUI from "@fastify/swagger-ui";
 
 const fastify = Fastify({
   logger: true,
+});
+
+await fastify.register(Swagger, {});
+await fastify.register(SwaggerUI, {
+  routePrefix: "/docs",
+  swagger: {
+    info: {
+      title: "Volunteer Now Docs",
+      description: "Documentation for the Volunteer Now API",
+      version: "0.1.0",
+    },
+    externalDocs: {
+      url: "https://swagger.io",
+      description: "Find more info here",
+    },
+    host: "localhost",
+    schemes: ["http"],
+    consumes: ["application/json"],
+    produces: ["application/json"],
+    tags: [
+      { name: "user", description: "User related end-points" },
+      { name: "code", description: "Code related end-points" },
+    ],
+    // definitions: {
+    //   User: {
+    //     type: 'object',
+    //     required: ['id', 'email'],
+    //     properties: {
+    //       id: { type: 'string', format: 'uuid' },
+    //       firstName: { type: 'string' },
+    //       lastName: { type: 'string' },
+    //       email: {type: 'string', format: 'email' }
+    //     }
+    //   }
+    // },
+    // securityDefinitions: {
+    //   apiKey: {
+    //     type: "apiKey",
+    //     name: "apiKey",
+    //     in: "header",
+    //   },
+    // },
+  },
 });
 
 const envSchema = {
@@ -91,5 +136,7 @@ fastify.listen({ port: fastify.config.PORT }, function (err, address) {
   }
   // Server is now listening on ${address}
 });
+
+fastify.swagger();
 
 export { fastify };
