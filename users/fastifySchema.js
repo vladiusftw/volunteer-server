@@ -38,7 +38,7 @@ const registerUserSchema = {
     },
 
     response: {
-      200: {
+      201: {
         description: "User Registered",
         type: "object",
         properties: {
@@ -67,7 +67,7 @@ const loginUserSchema = {
       },
     },
     response: {
-      200: {
+      201: {
         description: "Login Successful",
         type: "object",
         properties: {

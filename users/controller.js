@@ -20,6 +20,7 @@ const registerUser = async (response, reply) => {
       occupation,
       nationality,
     });
+    reply.code(201);
     return { data: "Registration complete" };
   } catch (e) {
     reply.code(400);
@@ -34,6 +35,7 @@ const login = async (request, reply) => {
     const match = await fastify.bcrypt.compare(password, user.password);
     if (match) {
       const token = fastify.jwt.sign({ id: user["_id"] });
+      reply.code(201);
       return { token };
     }
     reply.code(400);
