@@ -26,6 +26,7 @@ const registerUserSchema = {
         },
         password: {
           type: "string",
+          minLength: 8,
         },
         occupation: {
           type: "string",
