@@ -27,6 +27,16 @@ const registerUser = async (response, reply) => {
   }
 };
 
-const login = async (request, reply) => {};
+const login = async (request, reply) => {
+  const { email, password } = request.body;
+  const user = await Users.findOne({ email });
+  const match = await fastify.bcrypt.compare(password, user.password);
+  if (match) {
+    const token = fastify.jwt.sign({ id: user["_id"] });
+    return { token };
+  }
+  reply.code(400);
+  return { data: "Invalid email/password" };
+};
 
-export { registerUser };
+export { registerUser, login };
