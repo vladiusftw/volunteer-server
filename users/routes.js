@@ -1,13 +1,9 @@
-import mongoose from "mongoose";
-import Users from "./mongoSchema.js";
-import Events from "../events/mongoSchema.js";
 import {
   loginUserSchema,
   registerUserSchema,
   getUserByIdSchema,
 } from "./fastifySchema.js";
 import { login, registerUser, getUserById } from "./controller.js";
-import axios from "axios";
 import { checkIfClient } from "../validators/index.js";
 
 async function routes(fastify, options) {
