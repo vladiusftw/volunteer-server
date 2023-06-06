@@ -82,10 +82,33 @@ const getUsersByEvent = async (request, reply) => {
   try {
     const { event_id } = request.params;
 
-    const users = await Users.find({
-      role: "client",
-      events: { $elemMatch: { event_id: event_id } },
-    });
+    const users = await Users.aggregate([
+      {
+        $match: {
+          role: "client",
+        },
+      },
+      {
+        $unwind: "$events",
+      },
+      {
+        $match: {
+          "events.event_id": new mongoose.Types.ObjectId(event_id),
+        },
+      },
+      {
+        $project: {
+          name: 1,
+          dob: 1,
+          phone: 1,
+          email: 1,
+          occupation: 1,
+          nationality: 1,
+          event: "$events",
+        },
+      },
+    ]);
+
     return { data: users };
   } catch (e) {
     reply.code(400);

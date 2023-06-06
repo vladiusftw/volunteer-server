@@ -131,6 +131,23 @@ const getUsersByEventSchema = {
                 nationality: {
                   type: "string",
                 },
+                event: {
+                  type: "object",
+                  properties: {
+                    event_id: {
+                      type: "string",
+                    },
+                    completed: {
+                      type: "boolean",
+                    },
+                    start_date: {
+                      type: "string",
+                    },
+                    end_date: {
+                      type: "string",
+                    },
+                  },
+                },
               },
             },
           },
