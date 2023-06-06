@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import enums from "../constants.js";
 
 const subSchema = mongoose.Schema({
   _id: false,
@@ -48,6 +49,11 @@ const UserSchema = mongoose.Schema({
   },
   nationality: {
     type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    enum: enums,
     required: true,
   },
   events: [subSchema],

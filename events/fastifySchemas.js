@@ -1,5 +1,3 @@
-import Events from "./mongoSchema.js";
-
 const getEventByCitySchema = {
   schema: {
     params: {
@@ -28,7 +26,7 @@ const getEventByCitySchema = {
                 desc: {
                   type: "string",
                 },
-                host: {
+                host_id: {
                   type: "string",
                 },
                 country: {
@@ -93,4 +91,53 @@ const applyForNewEventSchema = {
   },
 };
 
-export { getEventByCitySchema, applyForNewEventSchema };
+const getUsersByEventSchema = {
+  schema: {
+    params: {
+      type: "object",
+      required: ["event_id"],
+      properties: {
+        event_id: {
+          type: "string",
+          minLength: 1,
+        },
+      },
+    },
+    response: {
+      200: {
+        description: "Users Obtained!",
+        type: "object",
+        properties: {
+          data: {
+            type: "array",
+            items: {
+              type: "object",
+              properties: {
+                name: {
+                  type: "string",
+                },
+                dob: {
+                  type: "string",
+                },
+                phone: {
+                  type: "number",
+                },
+                email: {
+                  type: "string",
+                },
+                occupation: {
+                  type: "string",
+                },
+                nationality: {
+                  type: "string",
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+};
+
+export { getEventByCitySchema, applyForNewEventSchema, getUsersByEventSchema };
