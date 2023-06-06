@@ -10,6 +10,7 @@ const registerUserSchema = {
         "password",
         "occupation",
         "nationality",
+        "role",
       ],
       properties: {
         name: {
@@ -32,6 +33,9 @@ const registerUserSchema = {
           type: "string",
         },
         nationality: {
+          type: "string",
+        },
+        role: {
           type: "string",
         },
       },
@@ -103,13 +107,13 @@ const getUserByIdSchema = {
               email: {
                 type: "string",
               },
-              password: {
-                type: "string",
-              },
               occupation: {
                 type: "string",
               },
               nationality: {
+                type: "string",
+              },
+              role: {
                 type: "string",
               },
               events: {
@@ -120,18 +124,18 @@ const getUserByIdSchema = {
                     event_id: {
                       type: "object",
                       properties: {
-                        name: { type: "string", nullable: true },
-                        desc: { type: "string", nullable: true },
-                        host: { type: "string", nullable: true },
-                        country: { type: "string", nullable: true },
-                        city: { type: "string", nullable: true },
-                        area: { type: "string", nullable: true },
-                        start_date: { type: "string", nullable: true },
-                        end_date: { type: "string", nullable: true },
-                        wage: { type: "number", nullable: true },
-                        start_time: { type: "string", nullable: true },
-                        end_time: { type: "string", nullable: true },
-                        min_age: { type: "number", nullable: true },
+                        name: { type: "string" },
+                        desc: { type: "string" },
+                        host_id: { type: "string" },
+                        country: { type: "string" },
+                        city: { type: "string" },
+                        area: { type: "string" },
+                        start_date: { type: "string" },
+                        end_date: { type: "string" },
+                        wage: { type: "number" },
+                        start_time: { type: "string" },
+                        end_time: { type: "string" },
+                        min_age: { type: "number" },
                       },
                     },
                     completed: {

@@ -3,7 +3,7 @@ import Users from "./mongoSchema.js";
 
 const registerUser = async (response, reply) => {
   try {
-    const { name, dob, phone, email, password, occupation, nationality } =
+    const { name, dob, phone, email, password, occupation, nationality, role } =
       response.body;
     const date = new Date(dob);
     if (date.toString().toLowerCase() == "invalid date") {
@@ -19,12 +19,14 @@ const registerUser = async (response, reply) => {
       password: hashedPassword,
       occupation,
       nationality,
+      role,
     });
     reply.code(201);
     return { data: "Registration complete" };
   } catch (e) {
     reply.code(400);
-    return { data: e.toString() };
+    if (e?.code == 11000) return { data: "Email already exists!" };
+    return { data: e.message };
   }
 };
 
@@ -34,7 +36,7 @@ const login = async (request, reply) => {
     const user = await Users.findOne({ email });
     const match = await fastify.bcrypt.compare(password, user.password);
     if (match) {
-      const token = fastify.jwt.sign({ id: user["_id"] });
+      const token = fastify.jwt.sign({ id: user["_id"], role: user["role"] });
       reply.code(201);
       return { token };
     }
@@ -42,7 +44,7 @@ const login = async (request, reply) => {
     return { data: "Invalid email/password" };
   } catch (e) {
     reply.code(400);
-    return { data: e.toString() };
+    return { data: e.message };
   }
 };
 
@@ -54,7 +56,7 @@ const getUserById = async (request, reply) => {
     return { data: user };
   } catch (e) {
     reply.code(400);
-    return { data: e.toString() };
+    return { data: e.message };
   }
 };
 

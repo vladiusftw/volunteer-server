@@ -9,8 +9,9 @@ const EventSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  host: {
-    type: String,
+  host_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "users",
     required: true,
   },
   country: {

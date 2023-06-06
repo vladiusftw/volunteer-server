@@ -8,6 +8,7 @@ import {
 } from "./fastifySchema.js";
 import { login, registerUser, getUserById } from "./controller.js";
 import axios from "axios";
+import { checkIfClient } from "../validators/index.js";
 
 async function routes(fastify, options) {
   fastify.post("/register", registerUserSchema, registerUser);
@@ -16,7 +17,11 @@ async function routes(fastify, options) {
 
   fastify.get(
     "/users/user",
-    { ...getUserByIdSchema, onRequest: [fastify.authenticate] },
+    {
+      ...getUserByIdSchema,
+      onRequest: [fastify.authenticate],
+      preHandler: [checkIfClient],
+    },
     getUserById
   );
 }
